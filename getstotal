@@ -1,0 +1,22 @@
+note='Random Restaurant TOTAL: 345.12'
+
+print(note)
+
+to=note.find('TOTAL')
+
+de=note[to:to+15].find('.')
+de=de+to
+
+value=note[de:de+3]
+
+value=note[de-1]+value
+
+
+for x in range(2,6):
+    if note[de-x].isdigit():
+        value=note[de-x]+value
+    else:
+        break
+
+
+print(value)
