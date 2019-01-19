@@ -7,22 +7,17 @@
 from PIL import Image
 import pytesseract
 import argparse
-import cv2
 import os
 '''
 
-try:
-    import Image
-except ImportError:
-    from PIL import Image
-
-import pytesseract
+from PIL import Image
+import pytesseract as pt
 
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
+pt.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 
 #Basic OCR
-print(pytesseract.image_to_string(Image.open('example_02.png')))
+print(pt.image_to_string(Image.open('example_02.png')))
 
 '''
 # construct the argument parse and parse the arguments
