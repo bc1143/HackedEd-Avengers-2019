@@ -1,0 +1,20 @@
+note="""Superstore
+paid in DEBIT"""
+
+if "CASH" in note:
+    payment='Cash'
+
+elif "CREDIT" in note:
+    payment='Credit Card'
+
+elif "DEBIT" in note:
+    payment='Debit Card'
+
+else:
+    payment='not recognized'
+
+print(payment)
+
+
+name=note.split('\n', 1)[0]
+print(name)
