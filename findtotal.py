@@ -7,3 +7,4 @@ def findtotal(filename):
         else:
             print('No total found')
 
+findtotal('receiptText_test.txt')
