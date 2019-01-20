@@ -7,6 +7,9 @@ If an uninterpretable answer is gotten, the user is asked to type again.
 Once the main category is recorded, the user is then asked for the sub-section.
 Once both are obtained, the data is stored into the dictionary for future reference.
 
+Will either use this program to sort the categories, or Ibrahim's database, he can complete it.
+
+-Han Wang
 '''
 
 
