@@ -20,7 +20,7 @@ d={
     'McDonalds':['Retail','Fast Food'],
     'Burger King':['Retail','Fast Food'],
     'Subway':['Retail','Fast Food'],
-    'Sobeys':['Retail','Grocery Store'],
+    'Save On Foods':['Retail','Grocery Store'],
     'Magnolia Golf':['Services','Golf'],
     'Princess Auto':['Services','Auto']
 }

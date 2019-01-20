@@ -20,7 +20,7 @@ def category_chart(client):
 
 def piechart():
     data, total = category_chart('Jerry Maguire')
-    plt.rcParams["figure.figsize"] = [8, 4.5]
+    plt.rcParams["figure.figsize"] = [16, 9]
     labels = [k for k in data]
     plt.pie([float(v) for v in data.values()], labels=[k for k in data],
            autopct=None)
@@ -31,7 +31,7 @@ def piechart():
 
 def barchart():
     data, total = category_chart('Jerry Maguire')
-    plt.rcParams["figure.figsize"] = [8, 4.5]
+    plt.rcParams["figure.figsize"] = [16, 9]
     names = list(data.keys())
     values = list(data.values())
     from matplotlib import rcParams
