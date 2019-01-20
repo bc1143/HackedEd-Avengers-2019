@@ -1,26 +1,14 @@
 # import the necessary packages
 from PIL import Image
 import pytesseract
-import argparse
 import cv2
-import urllib.request
-import numpy as np 
 import os
 
-url='http://172.31.21.206:8080/shot.jpg' #url to be used to connect to phone camera
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe" #path to tesseract on computer
 
-while True: #stream from Android phone and take an image 
-    imgResp = urllib.request.urlopen(url)
-    imgNp = np.array(bytearray(imgResp.read()),dtype=np.uint8)
-    img = cv2.imdecode(imgNp,-1)
-    cv2.imshow('test',img)
-    cv2.imwrite('receiptImage.png',img)
-    if ord('q')==cv2.waitKey(10):
-        exit(0)
 
 # load the example image and convert it to grayscale
-image = cv2.imread('receiptImage.jpg')
+image = cv2.imread('receipt2.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # apply thresholding to preprocess image
