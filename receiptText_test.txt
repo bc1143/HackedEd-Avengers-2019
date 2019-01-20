@@ -1,34 +1,84 @@
-Main Street Restaurant
-6332 Business Drive
-Suite 528
-Palo Alto California 94301
+@
 
-975~-1628095
+MORRISONS
 
-Fri 04/07/2017 11:36 AM
+Fresh choice for you
 
-Merchant ID: 9hqjxvufdr
-Terminal ID: eet ia
+Wm MORRISON
+Supermarkets ple BD3 7DL
+Woking
 
-Transaction ID: #e6d598ef
-Type: CREDIT
+ 
 
-PURCHASE
-Number : AXXXXXXXXXXXOO4 1
-Entry Mode: Swiped
+Manager : Lee King
+Telephone : 01483 755552
+Vat Nunber : 343475355
 
-Card Type: DISCOVER
+Savers Stamps
+Pick up a Card and Start
+Saving for Christmas Today
 
-Response: APPROVED
-Approval Code: 819543
+DATE: 19/06/2008 TIME: 17:54
+TILL: 0019 NO: 01969232
 
-Sub Total USD} 25.23
+ 
 
-ns
+You were served by:
 
-Paid USD$ 29.01
+ 
 
-Thanks for supporting
-local business!
+‘SCRIPTION
 
-THANK YOU
+ 
+
+'M’ FRESH SEA BREAM
+"W'SIDE OF SALMON
+"MH KIPPER FILLETS
+“M! PORK LEG STEAK
+M’ BROCCOLT
+0.270kg @ £1.99/kg
+"W'BABYLEAF AND HERB
+MRED GRAPES
+0.650kg @ £3.98/kg
+“M'BEST POTATOES
+HORLICKS
+
+DUREX EXTRA SAFE
+"TRIM BEANS:
+
+N' STRAWBERRIES
+
+Oro COREeSEe@SED CO CODD
+
+ 
+
+"M' RASPBERRIES
+NIVEA FOR MEN
+ENONS
+
+ 
+
+ReeSeenepereven Re ease
+
+ 
+
+ 
+
+Ttens Sold: 20 TOTAL £5.54
+
+CASH == £40.00
+
+Change £4.46
+
+VAT A 17.5% (£2.59): £0.39
+VAT B 5.0% (£5.98 ): £0.28
+VAT 0 0.0% (£26.97): £0.00
+VAT Total £0.67
+
+MULTISAVE
+£0.08
+
+SAVINGS
+AT MORRISONS
+Thank you for shopping at Morrisons
+Please cal] again
