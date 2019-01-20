@@ -1,5 +1,5 @@
 '''
-can only detect the first instance of the date in the form mm/dd/yyyy OR dd february yyyy OR dd Feb yyyy
+can only detect the first instance of the date in the form mm/dd/yyyy OR dd February yyyy OR dd Feb yyyy
 '''
 
 import re
@@ -12,3 +12,7 @@ matches = re.findall('(\d{2}[\/ ](\d{2}|January|Jan|February|Feb|March|Mar|April
 for match in matches:
     print(match[0])
     break
+
+ '''
+ should work for vast majority of receipts
+ '''
