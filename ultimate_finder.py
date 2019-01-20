@@ -93,3 +93,8 @@ find_store_name(testing_file)
 
 print('Transaction Date: ')
 find_date(testing_file)
+
+def safe_print(name):
+    print(name + " is a poop")
+
+safe_print("Ibrahim")
