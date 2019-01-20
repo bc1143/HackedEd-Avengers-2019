@@ -1,4 +1,5 @@
 import string
+import re
 
 
 def universal_finder(filename, find_list):
@@ -59,6 +60,26 @@ def find_total_number(filename):
     return real_total_baby
 
 
+def numbered_dates_find(target_string):
+    # Linny did this magic
+    matches = re.findall('(\d{2}[\/ ](\d{2}|January|Jan|February|Feb|March|'
+                         'Mar|April|Apr|May|May|June|Jun|July|Jul|August|Aug|September|'
+                         'Sep|October|Oct|November|Nov|December|Dec)[\/ ]\d{2,4})', target_string)
+    return matches[0][0]
+
+
+def find_date(filename):
+    suggestive_words = ["/", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+                        "Sept", "Oct", "Nov", "Dec", "January", "February", "March", "April",
+                        "May", "June", "July", "August", "September", "October", "November", "December",
+                        "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST",
+                        "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]
+    total_list, found_words = universal_finder(filename, suggestive_words)
+    target_word = found_words[0].lower()
+    numbered_date = numbered_dates_find(total_list[0])
+    print(numbered_date)
+    return numbered_date
+
 # Testing and debugging
 testing_file = "receiptText_test.txt"
 print('Total Paid: ')
@@ -69,3 +90,6 @@ find_payment_method(testing_file)
 
 print('Store Name: ')
 find_store_name(testing_file)
+
+print('Transaction Date: ')
+find_date(testing_file)
