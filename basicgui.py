@@ -1,60 +1,84 @@
-from tkinter import Tk, Label, Button, Entry, IntVar, END, W, E
+# Simple enough, just import everything from tkinter.
+from tkinter import *
 
-class Calculator:
+# download and install pillow:
+# http://www.lfd.uci.edu/~gohlke/pythonlibs/#pillow
+from PIL import Image, ImageTk
 
-    def __init__(self, master):
+
+# Here, we are creating our class, Window, and inheriting from the Frame
+# class. Frame is a class from the tkinter module. (see Lib/tkinter/__init__)
+class Window(Frame):
+
+    # Define settings upon initialization. Here you can specify
+    def __init__(self, master=None):
+        # parameters that you want to send through the Frame class.
+        Frame.__init__(self, master)
+
+        # reference to the master widget, which is the tk window
         self.master = master
-        master.title("Financial Fitness Tracker")
 
-        self.total = 0
-        self.entered_number = 0
+        # with that, we want to then run init_window, which doesn't yet exist
+        self.init_window()
 
-        self.total_label_text = IntVar()
-        self.total_label_text.set(self.total)
-        self.total_label = Label(master, textvariable=self.total_label_text)
+    # Creation of init_window
+    def init_window(self):
+        # changing the title of our master widget
+        self.master.title("GUI")
 
-        self.label = Label(master, text="Total:")
+        # allowing the widget to take the full space of the root window
+        self.pack(fill=BOTH, expand=1)
 
-        vcmd = master.register(self.validate) # we have to wrap the command
-        self.entry = Entry(master, validate="key", validatecommand=(vcmd, '%P'))
+        # creating a menu instance
+        menu = Menu(self.master)
+        self.master.config(menu=menu)
 
-        self.add_button = Button(master, text="+", command=lambda: self.update("add"))
-        self.subtract_button = Button(master, text="-", command=lambda: self.update("subtract"))
-        self.reset_button = Button(master, text="Reset", command=lambda: self.update("reset"))
+        # create the file object)
+        file = Menu(menu)
 
-        # LAYOUT
+        # adds a command to the menu option, calling it exit, and the
+        # command it runs on event is client_exit
+        file.add_command(label="Exit", command=self.client_exit)
 
-        self.label.grid(row=0, column=0, sticky=W)
-        self.total_label.grid(row=0, column=1, columnspan=2, sticky=E)
+        # added "file" to our menu
+        menu.add_cascade(label="File", menu=file)
 
-        self.entry.grid(row=1, column=0, columnspan=3, sticky=W+E)
+        # create the file object)
+        edit = Menu(menu)
 
-        self.add_button.grid(row=2, column=0)
-        self.subtract_button.grid(row=2, column=1)
-        self.reset_button.grid(row=2, column=2, sticky=W+E)
+        # adds a command to the menu option, calling it exit, and the
+        # command it runs on event is client_exit
+        edit.add_command(label="Show Img", command=self.showImg)
+        edit.add_command(label="Show Text", command=self.showText)
 
-    def validate(self, new_text):
-        if not new_text: # the field is being cleared
-            self.entered_number = 0
-            return True
+        # added "file" to our menu
+        menu.add_cascade(label="Edit", menu=edit)
 
-        try:
-            self.entered_number = int(new_text)
-            return True
-        except ValueError:
-            return False
+    def showImg(self):
+        load = Image.open("picture.png")
+        render = ImageTk.PhotoImage(load)
 
-    def update(self, method):
-        if method == "add":
-            self.total += self.entered_number
-        elif method == "subtract":
-            self.total -= self.entered_number
-        else: # reset
-            self.total = 0
+        # labels can be text or images
+        img = Label(self, image=render)
+        img.image = render
+        img.place(x=0, y=0)
 
-        self.total_label_text.set(self.total)
-        self.entry.delete(0, END)
+    def showText(self):
+        text = Label(self, text="Hey there good lookin!")
+        text.pack()
 
+    def client_exit(self):
+        exit()
+
+
+# root window created. Here, that would be the only window, but
+# you can later have windows within windows.
 root = Tk()
-my_gui = Calculator(root)
-root.mainloop()
+
+root.geometry("400x300")
+
+# creation of an instance
+app = Window(root)
+
+# mainloop
+root.mainloop()  

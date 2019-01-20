@@ -19,15 +19,23 @@ def category_chart(client):
     return trans_type, total
 
 def piechart(data):
-    plt.pie([float(v) for v in data.values()], labels=[k for k in data],
+    plt.rcParams["figure.figsize"] = [16, 9]
+    labels = [k for k in data]
+    apple = plt.pie([float(v) for v in data.values()], labels=[k for k in data],
            autopct=None)
-    plt.title('My Transactions')
-    plt.show()
+    plt.title('My Transactions\nYou sure you want to spend that much?')
+    # plt.legend(labels, loc='left center',bbox_to_anchor=(-0.08,1.),fontsize=10)
+    plt.show(apple)
 
 def barchart(data):
     names = list(data.keys())
     values = list(data.values())
-    plt.bar(range(len(data)),values,tick_label=names)
+    from matplotlib import rcParams
+    rcParams.update({'figure.autolayout': True})
+    plt.barh(range(len(data)),values,tick_label=names)
+    plt.xlabel('Types of Transactions')
+    plt.ylabel('Amount Spent')
+    plt.title('Your Transaction Breakdown')
     plt.show()
 
 def main():
