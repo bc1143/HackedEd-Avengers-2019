@@ -1,4 +1,4 @@
-Main Street Restaurant
+note="""Main Street Restaurant
 6332 Business Drive
 Suite 528
 Palo Alto California 94301
@@ -26,9 +26,30 @@ Sub Total USD} 25.23
 
 ns
 
-Paid USD$ 29.01
+USD$ 29.01
 
 Thanks for supporting
 local business!
 
-THANK YOU
+THANK YOU """
+
+
+
+to=note.find('Total')
+
+de=note[to:to+15].find('.')
+de=de+to
+
+value=note[de:de+3]
+
+value=note[de-1]+value
+
+
+for x in range(2,6):
+    if note[de-x].isdigit():
+        value=note[de-x]+value
+    else:
+        break
+
+
+print(value)
