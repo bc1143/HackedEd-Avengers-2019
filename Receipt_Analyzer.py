@@ -7,7 +7,7 @@ import os
 from yelpapi import YelpAPI
 import sys
 
-def takePicture():
+def takePicture(): #Takes a picture
     cv2.namedWindow("ReceiptCamera")
     vc = cv2.VideoCapture(0)
     
@@ -32,7 +32,7 @@ def takePicture():
     return 'Receipt.png'
 
 
-def tesseract(imageFile):
+def tesseract(imageFile): #Optical character recognition
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     # load the example image and convert it to grayscale
     image = cv2.imread(imageFile)
@@ -61,7 +61,7 @@ def tesseract(imageFile):
     return 'receiptText_test.txt'
     
 
-def universal_finder(filename, find_list):
+def universal_finder(filename, find_list): #Extract facts from the receipt
     # filename is name of receipt txt file from receipt image
     # find_list is list of target words
     marked_list = []  # List of lines that contains target words
@@ -79,7 +79,7 @@ def universal_finder(filename, find_list):
     return marked_list, found_words
 
 
-def find_store_name(filename):
+def find_store_name(filename): #Find name of store
     # Just looks at the first line of the receipt txt
     # Pray that it's there
     file = open(filename, 'r')
@@ -89,7 +89,7 @@ def find_store_name(filename):
     return store_name.lower()  # Turns it lowercase for easier processing
 
 
-def find_payment_method(filename):
+def find_payment_method(filename): #Find their payment method
     # Usually only one instance of one of the target words
     # Doesn't handle case if there is more than of these target words in the file
     suggestive_words = ["CASH", "Cash", "CREDIT", "Credit", "DEBIT", "Debit"]
@@ -98,8 +98,7 @@ def find_payment_method(filename):
     return payment_method[0].lower()
 
 
-def find_total_number(filename):
-    # Finds instances of target word
+def find_total_number(filename): # Finds instances of target word
     # Total usually shows up multiple times ie subtotal and total
     # Stores these possible totals and then picks the higher one
     # Doesn't work for Tesco receipts
@@ -129,7 +128,7 @@ def numbered_dates_find(target_string):
 '''
 
 
-def find_date(filename):
+def find_date(filename): #Find date of transaction
     #possible names of dates
     suggestive_words = ["/", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                         "Sept", "Oct", "Nov", "Dec", "January", "February", "March", "April",
@@ -144,7 +143,7 @@ def find_date(filename):
     return numbered_date
 
 
-def yelpSearch(store, city="Edmonton"):
+def yelpSearch(store, city="Edmonton"): #Search the store name on Yelp to find its classifications
     #my specific key
     yelp_api = YelpAPI("BkeVvBepP5xWd8hfOi_Pud4wx3d1NWAx7XV_oopCygqKDNuJyE1MBr5TqGhNlBf1KM-cVcz05YsyTGkAkeVq73yTbwbER51fVxc9Qq4vGBhwtCQkjZvPP9LBkvNDXHYx")
     #search yelp for the resturant
@@ -167,12 +166,11 @@ def yelpSearch(store, city="Edmonton"):
     return title
 
 
-def date_input():
-    #Allows user to enter a data
+def date_input(): #Allows user to enter a data of transaction
     month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     date = input('Please enter transaction date (DD/MM/YY): ').split('/')
-    month = date[1] + '.' + month_list[int(date[1]) - 1]
-    formatted_date = date[0] + '/' + month_list[int(date[1]) - 1] + '/' + date[2]
+    month = date[1] + '.' + month_list[int(date[1]) - 1] #Correcting format of month
+    formatted_date = date[0] + '/' + month_list[int(date[1]) - 1] + '/' + date[2] #Correcting format of date
     return month + ',' + formatted_date
 
 def main():
