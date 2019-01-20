@@ -21,11 +21,11 @@ def category_chart(client):
 def piechart(data):
     plt.rcParams["figure.figsize"] = [16, 9]
     labels = [k for k in data]
-    plt.pie([float(v) for v in data.values()], labels=[k for k in data],
+    apple = plt.pie([float(v) for v in data.values()], labels=[k for k in data],
            autopct=None)
     plt.title('My Transactions\nYou sure you want to spend that much?')
     # plt.legend(labels, loc='left center',bbox_to_anchor=(-0.08,1.),fontsize=10)
-    plt.show()
+    plt.show(apple)
 
 def barchart(data):
     names = list(data.keys())
