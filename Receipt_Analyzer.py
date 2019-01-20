@@ -137,13 +137,13 @@ def yelpSearch(store, city="Edmonton"):
 # Testing and debugging
 testing_file = tesseract('receipt8.jpg')
 print('Total Paid: ')
-paid = find_total_number(testing_file)
+paid = find_total_number(testing_file).rstrip()
 
 print('Payment Method: ')
-method = find_payment_method(testing_file)
+method = find_payment_method(testing_file).rstrip()
 
 print('Store Name: ')
-store = find_store_name(testing_file)
+store = find_store_name(testing_file).rstrip()
 
 '''
 print('Transaction Date: ')
@@ -152,11 +152,16 @@ date = find_date(testing_file)
 
 tags = yelpSearch(store)
 
-totalData = [store, tags[0], tags[1], method, paid]
+#totalData = [store, tags[0], tags[1], method, paid]
 
+client = 'Robin'
+date = 'XX.XXX,XX/XXX/XX'
+if len(tags)>1:
+    classification = tags[1].rstrip()
+else:
+    classification = tags[0].rstrip()
 
-filename = 'database.txt' 
+filename = 'SampleTransactionDataset.csv' 
+string = client + ',' + method + ',' + date + ',' + classification + ',' + store + ',(' + paid + '),0.00 ,(' + paid +'),\n'
 with open(filename, 'a') as f: 
-    for i in totalData:
-        f.write(i.rstrip() + '\n')
-    f.write('\n')
+    f.write(string)
