@@ -76,6 +76,7 @@ def universal_finder(filename, find_list): #Extract facts from the receipt
                 marked_list.append(lines[i])
                 found_words.append(word)
     file.close()
+    
     return marked_list, found_words
 
 
@@ -95,6 +96,8 @@ def find_payment_method(filename): #Find their payment method
     suggestive_words = ["CASH", "Cash", "CREDIT", "Credit", "DEBIT", "Debit"]
     total_list, payment_method = universal_finder(filename, suggestive_words)
     # print(payment_method[0].lower())
+    if len(payment_method) == 0:
+        payment_method.append('')
     return payment_method[0].lower()
 
 
