@@ -26,7 +26,7 @@ Sub Total USD} 25.23
 
 ns
 
-USD$ 29.01
+Paid USD$ 29.01
 
 Thanks for supporting
 local business!
