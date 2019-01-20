@@ -129,6 +129,8 @@ def yelpSearch(store, city="Edmonton"):
         pass
     title.append(title1)
     title.append(title2)
+    
+    return title
 
 
 
@@ -151,3 +153,10 @@ date = find_date(testing_file)
 tags = yelpSearch(store)
 
 totalData = [store, tags[0], tags[1], method, paid]
+
+
+filename = 'database.txt' 
+with open(filename, 'a') as f: 
+    for i in totalData:
+        f.write(i.rstrip() + '\n')
+    f.write('\n')
