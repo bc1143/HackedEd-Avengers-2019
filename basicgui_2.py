@@ -68,7 +68,7 @@ def next(panel):
     panel.image = img # keep a reference!
 
 def prev(panel):
-    path = "picture.png"
+    path = "picture.png" #alternate
     img = ImageTk.PhotoImage(Image.open(path))
     panel.configure(image=img)
     panel.image = img # keep a reference!
@@ -76,6 +76,7 @@ def prev(panel):
 
 window = tk.Tk()
 window.title("Welcome to Financial Fitness")
+lbl = tk.Label(window, text="Here is your spending history!",font=("Garamond", 40))
 
 
 top = tk.Frame(window)
@@ -83,7 +84,7 @@ top.pack(side="top")
 bottom = tk.Frame(window)
 bottom.pack(side="bottom")
 
-path = "finfit.png"
+path = "finfit.png" #this is the image displayed first
 img = ImageTk.PhotoImage(Image.open(path))
 panel = tk.Label(window, image = img)
 panel.image = img # keep a reference!
