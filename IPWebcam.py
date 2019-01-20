@@ -19,9 +19,10 @@ class button:
 
 window.mainloop()
 
-btn=button
-prev_button = tk.Button(window, text="Take Photo", width=10, height=2, command=lambda: prev(panel))
-prev_button.pack(in_=bottom, side="left")
+btn=button()
+window.CreateButton().onclick(btn.click) #tk.Button(window, text="Bar Chart", width=10, height=2, command=lambda: prev(panel))
+prev_button = tk.Button(window, text="Bar Chart", width=10, height=2, command=lambda: prev(panel))
+    prev_button.pack(in_=bottom, side="left")
 while self.clicked == True:
    imgResp = urllib.request.urlopen(url)
    imgNp = np.array(bytearray(imgResp.read()),dtype=np.uint8)

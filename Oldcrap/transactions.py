@@ -23,5 +23,3 @@ def import_data():
 
 def main():
 	transaction_list = import_data()
-
-main()
