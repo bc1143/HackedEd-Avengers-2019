@@ -9,3 +9,10 @@ RECEIPT PARSER:
 -picture taken by computer webcam and converted into text with Tesseract
 -obtains store name, type of store, money spent, as well as type of payment
 -date is manually entered to ensure maximum accuracy
+-all this data is stored on a .csv file
+
+FINANCIAL ANALYSIS:
+-presents database results (pie graph and bar graph) 
+-always individual to view how much money they are spending on different categories (ie. fast food, retail, etc.)
+
+
