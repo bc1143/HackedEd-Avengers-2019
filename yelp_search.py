@@ -13,5 +13,6 @@ def yelpSearch(store, city="Edmonton"):
     except IndexError:
         pass
     print(title1, title2)
-    
+
+
 yelpSearch("A&W")
