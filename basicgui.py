@@ -1,3 +1,6 @@
+from Chart_Choose import piechart, barchart
+
+
 # Simple enough, just import everything from tkinter.
 from tkinter import *
 
@@ -48,14 +51,15 @@ class Window(Frame):
 
         # adds a command to the menu option, calling it exit, and the
         # command it runs on event is client_exit
-        edit.add_command(label="Show Img", command=self.showImg)
-        edit.add_command(label="Show Text", command=self.showText)
+        edit.add_command(label="Show Pie Graph", command=self.showPie)
+        edit.add_command(label="Show Bar Graph", command=self.showBar)
 
         # added "file" to our menu
         menu.add_cascade(label="Edit", menu=edit)
 
-    def showImg(self):
-        load = Image.open("picture.png")
+    def showPie(self):
+        piechart()
+        load = Image.open("pie.png")
         render = ImageTk.PhotoImage(load)
 
         # labels can be text or images
@@ -63,9 +67,17 @@ class Window(Frame):
         img.image = render
         img.place(x=0, y=0)
 
-    def showText(self):
-        text = Label(self, text="Hey there good lookin!")
-        text.pack()
+
+
+    def showBar(self):
+        barchart()
+        load = Image.open("bar.png")
+        render = ImageTk.PhotoImage(load)
+
+        # labels can be text or images
+        img = Label(self, image=render)
+        img.image = render
+        img.place(x=-200, y=-500)
 
     def client_exit(self):
         exit()
@@ -75,10 +87,10 @@ class Window(Frame):
 # you can later have windows within windows.
 root = Tk()
 
-root.geometry("400x300")
+root.geometry("2000x1900")
 
 # creation of an instance
 app = Window(root)
 
 # mainloop
-root.mainloop()  
+root.mainloop()

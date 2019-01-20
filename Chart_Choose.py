@@ -18,16 +18,20 @@ def category_chart(client):
                 trans_type[i.category] += amount
     return trans_type, total
 
-def piechart(data):
-    plt.rcParams["figure.figsize"] = [16, 9]
+def piechart():
+    data, total = category_chart('Jerry Maguire')
+    plt.rcParams["figure.figsize"] = [8, 4.5]
     labels = [k for k in data]
-    apple = plt.pie([float(v) for v in data.values()], labels=[k for k in data],
+    plt.pie([float(v) for v in data.values()], labels=[k for k in data],
            autopct=None)
     plt.title('My Transactions\nYou sure you want to spend that much?')
     # plt.legend(labels, loc='left center',bbox_to_anchor=(-0.08,1.),fontsize=10)
-    plt.show(apple)
+    #plt.show()
+    plt.savefig('pie.png')
 
-def barchart(data):
+def barchart():
+    data, total = category_chart('Jerry Maguire')
+    plt.rcParams["figure.figsize"] = [8, 4.5]
     names = list(data.keys())
     values = list(data.values())
     from matplotlib import rcParams
@@ -36,12 +40,5 @@ def barchart(data):
     plt.xlabel('Types of Transactions')
     plt.ylabel('Amount Spent')
     plt.title('Your Transaction Breakdown')
-    plt.show()
-
-def main():
-    transaction_data, total = category_chart('Jerry Maguire')
-    print(transaction_data)
-    piechart(transaction_data)
-    barchart(transaction_data)
-
-main()
+    #plt.show()
+    plt.savefig('bar.png')
