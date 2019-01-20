@@ -7,6 +7,7 @@ import os
 from yelpapi import YelpAPI
 import sys
 
+
 def tesseract(imageFile):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
     # load the example image and convert it to grayscale
@@ -93,6 +94,7 @@ def find_total_number(filename):
     # print(real_total_baby)
     return real_total_baby
 
+
 '''
 def numbered_dates_find(target_string):
     # Linny did this magic
@@ -101,6 +103,7 @@ def numbered_dates_find(target_string):
                          'Sep|October|Oct|November|Nov|December|Dec)[\/ ]\d{2,4})', target_string)
     return matches[0][0]
 '''
+
 
 def find_date(filename):
     suggestive_words = ["/", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
@@ -113,6 +116,7 @@ def find_date(filename):
     numbered_date = numbered_dates_find(total_list[0])
     # print(numbered_date)
     return numbered_date
+
 
 def yelpSearch(store, city="Edmonton"):
     yelp_api = YelpAPI("BkeVvBepP5xWd8hfOi_Pud4wx3d1NWAx7XV_oopCygqKDNuJyE1MBr5TqGhNlBf1KM-cVcz05YsyTGkAkeVq73yTbwbER51fVxc9Qq4vGBhwtCQkjZvPP9LBkvNDXHYx")
@@ -133,6 +137,14 @@ def yelpSearch(store, city="Edmonton"):
     
     return title
 
+
+def date_input():
+    month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    date = input('Please enter transaction date (DD/MM/YY): ').split('/')
+    month = date[1] + '.' + month_list[int(date[1]) - 1]
+    formatted_date = date[0] + '/' + month_list[int(date[1]) - 1] + '/' + date[2]
+    return month + ',' + formatted_date
+
 def main():
     if len(sys.argv) > 1:
         filename = sys.argv[1]
@@ -145,7 +157,8 @@ def main():
     # date = find_date(testing_file)
     tags = yelpSearch(store)
     client = 'Robin'
-    date = 'XX.XXX,XX/XXX/XX'
+    # date = date_input()
+    date = 'XX.XXX,XX/XX/XX'
     if len(tags)>1:
         classification = tags[1].rstrip()
     else:
