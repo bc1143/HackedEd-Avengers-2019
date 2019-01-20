@@ -5,6 +5,7 @@ import pytesseract
 import cv2
 import os
 from yelpapi import YelpAPI
+import sys
 
 def tesseract(imageFile):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
@@ -59,7 +60,7 @@ def find_store_name(filename):
     file = open(filename, 'r')
     store_name = file.readline()
     file.close()
-    print(store_name.lower())
+    # print(store_name.lower())
     return store_name.lower()  # Turns it lowercase for easier processing
 
 
@@ -68,7 +69,7 @@ def find_payment_method(filename):
     # Doesn't handle case if there is more than of these target words in the file
     suggestive_words = ["CASH", "Cash", "CREDIT", "Credit", "DEBIT", "Debit"]
     total_list, payment_method = universal_finder(filename, suggestive_words)
-    print(payment_method[0].lower())
+    # print(payment_method[0].lower())
     return payment_method[0].lower()
 
 
@@ -89,7 +90,7 @@ def find_total_number(filename):
         total_amount = ''.join(construct_total)
         confusion_matrix.append(total_amount)
     real_total_baby = max(confusion_matrix)  # Picks highest total as the real total
-    print(real_total_baby)
+    # print(real_total_baby)
     return real_total_baby
 
 '''
@@ -110,7 +111,7 @@ def find_date(filename):
     total_list, found_words = universal_finder(filename, suggestive_words)
     target_word = found_words[0].lower()
     numbered_date = numbered_dates_find(total_list[0])
-    print(numbered_date)
+    # print(numbered_date)
     return numbered_date
 
 def yelpSearch(store, city="Edmonton"):
@@ -132,36 +133,28 @@ def yelpSearch(store, city="Edmonton"):
     
     return title
 
+def main():
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
+    else:
+        filename = 'receipt2.JPG'
+    testing_file = tesseract(filename)
+    paid = find_total_number(testing_file).rstrip()
+    method = find_payment_method(testing_file).rstrip()
+    store = find_store_name(testing_file).rstrip()
+    # date = find_date(testing_file)
+    tags = yelpSearch(store)
+    client = 'Robin'
+    date = 'XX.XXX,XX/XXX/XX'
+    if len(tags)>1:
+        classification = tags[1].rstrip()
+    else:
+        classification = tags[0].rstrip()
 
+    filename = 'SampleTransactionDataset.csv' 
+    string = client + ',' + method + ',' + date + ',' + classification + ',' \
+    + store + ',(' + paid + '),0.00 ,(' + paid +'),\n'
+    with open(filename, 'a') as f: 
+        f.write(string)
 
-# Testing and debugging
-testing_file = tesseract('receipt8.jpg')
-print('Total Paid: ')
-paid = find_total_number(testing_file).rstrip()
-
-print('Payment Method: ')
-method = find_payment_method(testing_file).rstrip()
-
-print('Store Name: ')
-store = find_store_name(testing_file).rstrip()
-
-'''
-print('Transaction Date: ')
-date = find_date(testing_file)
-'''
-
-tags = yelpSearch(store)
-
-#totalData = [store, tags[0], tags[1], method, paid]
-
-client = 'Robin'
-date = 'XX.XXX,XX/XXX/XX'
-if len(tags)>1:
-    classification = tags[1].rstrip()
-else:
-    classification = tags[0].rstrip()
-
-filename = 'SampleTransactionDataset.csv' 
-string = client + ',' + method + ',' + date + ',' + classification + ',' + store + ',(' + paid + '),0.00 ,(' + paid +'),\n'
-with open(filename, 'a') as f: 
-    f.write(string)
+main()
