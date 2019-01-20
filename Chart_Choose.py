@@ -19,8 +19,9 @@ def category_chart(client):
     return trans_type, total
 
 def piechart():
+    plt.clf()
     data, total = category_chart('Jerry Maguire')
-    plt.rcParams["figure.figsize"] = [16, 9]
+    plt.rcParams["figure.figsize"] = [24, 12]
     labels = [k for k in data]
     plt.pie([float(v) for v in data.values()], labels=[k for k in data],
            autopct=None)
@@ -30,8 +31,9 @@ def piechart():
     plt.savefig('pie.png')
 
 def barchart():
+    plt.clf()
     data, total = category_chart('Jerry Maguire')
-    plt.rcParams["figure.figsize"] = [16, 9]
+    plt.rcParams["figure.figsize"] = [24, 12]
     names = list(data.keys())
     values = list(data.values())
     from matplotlib import rcParams

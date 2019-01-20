@@ -14,12 +14,13 @@ def prev(panel):
     panel.configure(image=img)
     panel.image = img # keep a reference!
 
-def create_window():
-    piechart()
+def render_charts():
     barchart()
+    piechart()
+
+def create_window():
     window = tk.Tk()
     window.title("Welcome to Financial Fitness")
-    lbl = tk.Label(window, text="Here is your spending history!",font=("Garamond", 40))
 
 
     top = tk.Frame(window)
@@ -29,13 +30,16 @@ def create_window():
 
     path = "finfit.png" #this is the image displayed first
     img = ImageTk.PhotoImage(Image.open(path))
-    panel = tk.Label(window, image = img)
+    panel = tk.Label(window, image =img)
     panel.image = img # keep a reference!
     panel.pack(side = "top", fill = "both", expand = "yes")
 
+    render_charts()
     prev_button = tk.Button(window, text="Bar Chart", width=10, height=2, command=lambda: prev(panel))
     prev_button.pack(in_=bottom, side="left")
     next_button = tk.Button(window, text="Pie Chart", width=10, height=2, command=lambda: next(panel))
     next_button.pack(in_=bottom, side="right")
 
     window.mainloop()
+
+create_window()
