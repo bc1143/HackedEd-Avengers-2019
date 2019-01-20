@@ -6,7 +6,6 @@ This data can then be analyzed, and recommendations will be given to the individ
 
 
 RECEIPT PARSER:
--can determine the date for vast majority of samples via importing regex and utilizing .findall()
--the name of store where the purchase was made can be generally determined by reading the first line of the text
--total amount spent can be found by taking the first few integers after "TOTAL:", the decimal point, as well as the 2 integers after
--
+-picture taken by computer webcam and converted into text with Tesseract
+-obtains store name, type of store, money spent, as well as type of payment
+-date is manually entered to ensure maximum accuracy
