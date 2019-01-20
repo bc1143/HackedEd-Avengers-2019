@@ -15,4 +15,5 @@ for match in matches:
 
  '''
  should work for vast majority of receipts
+ -Han Wang
  '''
