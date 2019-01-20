@@ -19,5 +19,9 @@ def import_data():
 		for row in transaction_reader:
 			transaction_list.append(transaction(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8]))
 		transaction_list.pop(0)
-		print(transaction_list[0].category)
-	return import_data
+	return transaction_list
+
+def main():
+	transaction_list = import_data()
+
+main()
