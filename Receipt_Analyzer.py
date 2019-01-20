@@ -7,6 +7,30 @@ import os
 from yelpapi import YelpAPI
 import sys
 
+def takePicture():
+    cv2.namedWindow("ReceiptCamera")
+    vc = cv2.VideoCapture(0)
+    
+    if vc.isOpened(): # try to get the first frame
+        rval, frame = vc.read()
+    else:
+        rval = False
+    
+    while rval:
+        cv2.imshow("preview", frame) #show stream
+        rval, frame = vc.read()
+        key = cv2.waitKey(20)
+        if key == 27: # exit on ESC
+            break
+        if cv2.waitKey(1) & 0xFF == ord('r'): #save on pressing 'r' 
+            cv2.imwrite('Receipt.png',frame)
+            cv2.destroyAllWindows()
+            break    
+        
+    cv2.destroyWindow("ReceiptCamera") 
+    
+    return 'Receipt.png'
+
 
 def tesseract(imageFile):
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
@@ -106,11 +130,13 @@ def numbered_dates_find(target_string):
 
 
 def find_date(filename):
+    #possible names of dates
     suggestive_words = ["/", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
                         "Sept", "Oct", "Nov", "Dec", "January", "February", "March", "April",
                         "May", "June", "July", "August", "September", "October", "November", "December",
                         "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST",
-                        "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"]
+                        "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"] 
+    #try to find it in the receipt
     total_list, found_words = universal_finder(filename, suggestive_words)
     target_word = found_words[0].lower()
     numbered_date = numbered_dates_find(total_list[0])
@@ -119,11 +145,14 @@ def find_date(filename):
 
 
 def yelpSearch(store, city="Edmonton"):
+    #my specific key
     yelp_api = YelpAPI("BkeVvBepP5xWd8hfOi_Pud4wx3d1NWAx7XV_oopCygqKDNuJyE1MBr5TqGhNlBf1KM-cVcz05YsyTGkAkeVq73yTbwbER51fVxc9Qq4vGBhwtCQkjZvPP9LBkvNDXHYx")
+    #search yelp for the resturant
     op = yelp_api.search_query(term=store, location=city, sort_by='rating', limit = 5)
     title1 = ''
     title2 = ''
     title = []
+    #find the descriptors of the buisness
     try:
         title1=op['businesses'][0]['categories'][0]['title']
     except IndexError:
@@ -139,6 +168,7 @@ def yelpSearch(store, city="Edmonton"):
 
 
 def date_input():
+    #Allows user to enter a data
     month_list = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
     date = input('Please enter transaction date (DD/MM/YY): ').split('/')
     month = date[1] + '.' + month_list[int(date[1]) - 1]
@@ -146,27 +176,29 @@ def date_input():
     return month + ',' + formatted_date
 
 def main():
+    #Allow use of command line
     if len(sys.argv) > 1:
         filename = sys.argv[1]
     else:
-        filename = 'receipt2.JPG'
+        filename = takePicture()
     testing_file = tesseract(filename)
-    paid = find_total_number(testing_file).rstrip()
-    method = find_payment_method(testing_file).rstrip()
-    store = find_store_name(testing_file).rstrip()
+    paid = find_total_number(testing_file).rstrip() #find money paid
+    method = find_payment_method(testing_file).rstrip() #find method of payment
+    store = find_store_name(testing_file).rstrip() #find store
     # date = find_date(testing_file)
-    tags = yelpSearch(store)
-    client = 'Robin'
-    # date = date_input()
+    tags = yelpSearch(store) #find tags of the store
+    client = 'Robin' #placeholder client
+    # date = date_input() 
     date = 'XX.XXX,XX/XX/XX'
+    #Get the most relevant tag, which is usually the second one
     if len(tags)>1:
         classification = tags[1].rstrip()
     else:
         classification = tags[0].rstrip()
 
-    filename = 'SampleTransactionDataset.csv' 
+    filename = 'SampleTransactionDataset.csv' #Database (spreadsheet) of all transactions, including Servus database
     string = client + ',' + method + ',' + date + ',' + classification + ',' \
-    + store + ',(' + paid + '),0.00 ,(' + paid +'),\n'
+    + store + ',(' + paid + '),0.00 ,(' + paid +'),\n' #Proper formatting to put it into the database
     with open(filename, 'a') as f: 
         f.write(string)
 

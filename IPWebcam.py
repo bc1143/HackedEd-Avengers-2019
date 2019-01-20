@@ -23,10 +23,10 @@ btn=button
 prev_button = tk.Button(window, text="Take Photo", width=10, height=2, command=lambda: prev(panel))
 prev_button.pack(in_=bottom, side="left")
 while self.clicked == True:
-    imgResp = urllib.request.urlopen(url)
-    imgNp = np.array(bytearray(imgResp.read()),dtype=np.uint8)
-    img = cv2.imdecode(imgNp,-1)
-    cv2.imshow('test',img)
-    cv2.imwrite('receiptImage.png',img)
-    if ord('q')==cv2.waitKey(10):
-        exit(0)
+   imgResp = urllib.request.urlopen(url)
+   imgNp = np.array(bytearray(imgResp.read()),dtype=np.uint8)
+   img = cv2.imdecode(imgNp,-1)
+   cv2.imshow('test',img)
+   cv2.imwrite('receiptImage.png',img)
+   if ord('q')==cv2.waitKey(10):
+       exit(0)
