@@ -6,8 +6,10 @@ import cv2
 import os
 from yelpapi import YelpAPI
 import sys
+#TODO:
+# Add option for user to reassign classifications
 
-def takePicture(): #Takes a picture
+def takePicture(): #Takes a picture of receipt
     cv2.namedWindow("ReceiptCamera")
     vc = cv2.VideoCapture(0)
     
