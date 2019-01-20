@@ -116,7 +116,10 @@ def find_total_number(filename): # Finds instances of target word
                 construct_total.append(characters)
         total_amount = ''.join(construct_total)
         confusion_matrix.append(total_amount)
-    real_total_baby = max(confusion_matrix)  # Picks highest total as the real total
+    try:
+        real_total_baby = max(confusion_matrix)  # Picks highest total as the real total
+    except ValueError:
+        real_total_baby = '???'
     # print(real_total_baby)
     return real_total_baby
 
